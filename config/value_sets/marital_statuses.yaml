@@ -1,0 +1,14 @@
+name: marital_statuses
+description: HL7 marital status codes
+
+values:
+  - code: "S"
+    description: "Single"
+  - code: "M"
+    description: "Married"
+  - code: "D"
+    description: "Divorced"
+  - code: "W"
+    description: "Widowed"
+  - code: "A"
+    description: "Separated"

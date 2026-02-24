@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title_suffix %} - Patients{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Patient Pool</h2>
+    <div class="pool-stats">
+        <span id="pool-total">0</span> total |
+        <span id="pool-idle">0</span> idle |
+        <span id="pool-active">0</span> active
+    </div>
+</div>
+
+<div class="search-bar">
+    <select id="patient-status-filter" onchange="loadPatients()">
+        <option value="">All Statuses</option>
+        <option value="idle">Idle</option>
+        <option value="active">Active</option>
+        <option value="discharged">Discharged</option>
+    </select>
+</div>
+
+<div id="patients-table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>MRN</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Status</th>
+                <th>Location</th>
+                <th>Workflow</th>
+            </tr>
+        </thead>
+        <tbody id="patients-body">
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    loadPatients();
+    setInterval(loadPatients, 10000);
+</script>
+{% endblock %}

@@ -1,0 +1,44 @@
+facility:
+  sending_application: "HIS"
+  sending_facility: "GENERAL_HOSPITAL"
+  receiving_application: ""
+  receiving_facility: ""
+
+scheduling:
+  default_rate: 5.0
+  time_of_day:
+    - start: "08:00"
+      end: "17:00"
+      rate: 15.0
+    - start: "17:00"
+      end: "22:00"
+      rate: 8.0
+    - start: "22:00"
+      end: "06:00"
+      rate: 2.0
+
+transport:
+  destinations:
+    - name: console
+      type: console
+      enabled: true
+
+patient_pool:
+  pool_size: 500
+  min_age: 1
+  max_age: 95
+  insurance_rate: 0.85  # 0.0-1.0, percentage of patients with insurance (IN1/IN2/IN3)
+
+web:
+  host: "0.0.0.0"
+  port: 8080
+  enabled: true
+
+auth:
+  username: "admin"
+  password: "admin"
+
+hl7_version: "2.5.1"
+auto_start: false
+workflows_dir: "config/workflows"
+value_sets_dir: "config/value_sets"

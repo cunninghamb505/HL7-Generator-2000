@@ -1,0 +1,39 @@
+name: radiology_order
+description: Radiology imaging order and results
+weight: 1.0
+patient_class: O
+tags: [outpatient, radiology]
+
+steps:
+  - registration:
+      loc: "RAD"
+      patient_class: "O"
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - lab_order:
+      order_profile: "CBC"
+      priority: "R"
+
+  - delay:
+      min: "2s"
+      max: "4s"
+
+  - lab_result:
+      order_profile: "CBC"
+
+  - document:
+      document_type: "RR"
+      trigger: "T02"
+      document_text: "Imaging performed. Findings documented. No acute abnormality identified."
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - billing:
+      num_charges: 3
+
+  - discharge: {}

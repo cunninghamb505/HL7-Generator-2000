@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title_suffix %} - Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Dashboard</h2>
+    <div class="controls">
+        <button id="btn-start" class="btn btn-success" onclick="controlSim('start')">Start</button>
+        <button id="btn-pause" class="btn btn-warning" onclick="controlSim('pause')">Pause</button>
+        <button id="btn-stop" class="btn btn-danger" onclick="controlSim('stop')">Stop</button>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-label">Status</div>
+        <div class="stat-value" id="stat-status">--</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Messages Sent</div>
+        <div class="stat-value" id="stat-messages">0</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Messages/min</div>
+        <div class="stat-value" id="stat-rate">0</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Active Workflows</div>
+        <div class="stat-value" id="stat-active-workflows">0</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Completed Workflows</div>
+        <div class="stat-value" id="stat-completed-workflows">0</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-label">Errors</div>
+        <div class="stat-value" id="stat-errors">0</div>
+    </div>
+</div>
+
+<div class="rate-control">
+    <label for="rate-slider">Message Rate: <span id="rate-display">5.0</span> msgs/min</label>
+    <input type="range" id="rate-slider" min="0.5" max="60" step="0.5" value="5.0"
+           oninput="updateRateDisplay(this.value)" onchange="setRate(this.value)">
+</div>
+
+<div class="section">
+    <h3>Message Types</h3>
+    <div id="message-types-chart" class="chart-container"></div>
+</div>
+
+<div class="section">
+    <h3>Live Message Feed</h3>
+    <div id="message-feed" class="message-feed">
+        <div class="feed-empty">Waiting for messages...</div>
+    </div>
+</div>
+{% endblock %}

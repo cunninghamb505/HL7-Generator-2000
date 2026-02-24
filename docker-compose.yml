@@ -1,0 +1,14 @@
+services:
+  hl7-generator:
+    build: .
+    ports:
+      - "8080:8080"
+      - "2575:2575"
+    volumes:
+      - ./config:/app/config
+      - ./output:/app/output
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped

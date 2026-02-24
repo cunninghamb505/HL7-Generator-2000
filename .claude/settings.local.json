@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:crs4.github.io)",
+      "WebFetch(domain:python-hl7.readthedocs.io)",
+      "WebFetch(domain:hl7-definition.caristix.com)",
+      "Bash(python -c:*)",
+      "Bash(python -m pip install:*)",
+      "Bash(python -m pytest:*)",
+      "Bash(git init:*)",
+      "Bash(grep:*)",
+      "Bash(for f in \"C:\\\\Users\\\\brand\\\\Documents\\\\code-projects\\\\hl7-generator2000\\\\src\\\\generators\\\\message_types\"/*.py)",
+      "Bash(do basename \"$f\" .py)",
+      "Bash(done)"
+    ]
+  }
+}

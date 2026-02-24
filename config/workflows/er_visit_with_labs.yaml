@@ -1,0 +1,52 @@
+name: er_visit_with_labs
+description: Emergency department visit with lab work
+weight: 3.0
+patient_class: E
+tags: [emergency, labs]
+
+steps:
+  - registration:
+      loc: "ED"
+      patient_class: "E"
+
+  - delay:
+      min: "2s"
+      max: "5s"
+
+  - lab_order:
+      order_profile: "CMP"
+      priority: "S"
+
+  - condition:
+      probability: 0.6
+      if_true:
+        - lab_order:
+            order_profile: "CBC"
+            priority: "S"
+
+  - delay:
+      min: "3s"
+      max: "8s"
+
+  - lab_result:
+      order_profile: "CMP"
+
+  - condition:
+      probability: 0.6
+      if_true:
+        - lab_result:
+            order_profile: "CBC"
+
+  - condition:
+      probability: 0.3
+      if_true:
+        - pharmacy_order: {}
+
+  - delay:
+      min: "2s"
+      max: "5s"
+
+  - billing:
+      num_charges: 3
+
+  - discharge: {}

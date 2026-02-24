@@ -1,0 +1,40 @@
+name: locations
+description: Hospital locations and departments
+
+values:
+  - code: "ED"
+    name: "Emergency Department"
+    beds: ["ED-01", "ED-02", "ED-03", "ED-04", "ED-05"]
+  - code: "ICU"
+    name: "Intensive Care Unit"
+    beds: ["ICU-01", "ICU-02", "ICU-03", "ICU-04"]
+  - code: "MED"
+    name: "Medical Ward"
+    beds: ["MED-101", "MED-102", "MED-103", "MED-104", "MED-105"]
+  - code: "SURG"
+    name: "Surgical Ward"
+    beds: ["SURG-201", "SURG-202", "SURG-203"]
+  - code: "OBS"
+    name: "Obstetrics"
+    beds: ["OBS-301", "OBS-302", "OBS-303"]
+  - code: "PEDS"
+    name: "Pediatrics"
+    beds: ["PEDS-401", "PEDS-402"]
+  - code: "CARD"
+    name: "Cardiology"
+    beds: ["CARD-501", "CARD-502"]
+  - code: "ORTH"
+    name: "Orthopedics"
+    beds: ["ORTH-601", "ORTH-602"]
+  - code: "OUT"
+    name: "Outpatient Clinic"
+    beds: ["OUT-01", "OUT-02", "OUT-03"]
+  - code: "RAD"
+    name: "Radiology"
+    beds: ["RAD-01", "RAD-02"]
+  - code: "LAB"
+    name: "Laboratory"
+    beds: ["LAB-01"]
+  - code: "PHARM"
+    name: "Pharmacy"
+    beds: ["PHARM-01"]

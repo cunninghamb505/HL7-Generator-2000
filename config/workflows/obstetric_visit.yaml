@@ -1,0 +1,53 @@
+name: obstetric_visit
+description: Obstetric prenatal visit with labs
+weight: 0.8
+patient_class: O
+tags: [outpatient, obstetric]
+
+steps:
+  - registration:
+      loc: "OBS"
+      patient_class: "O"
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - lab_order:
+      order_profile: "CBC"
+      priority: "R"
+
+  - lab_order:
+      order_profile: "CMP"
+      priority: "R"
+
+  - condition:
+      probability: 0.5
+      if_true:
+        - lab_order:
+            order_profile: "UA"
+            priority: "R"
+
+  - delay:
+      min: "3s"
+      max: "5s"
+
+  - lab_result:
+      order_profile: "CBC"
+
+  - lab_result:
+      order_profile: "CMP"
+
+  - document:
+      document_type: "PN"
+      trigger: "T02"
+
+  - scheduling:
+      trigger: "S12"
+      appointment_type: "FOLLOWUP"
+      duration: "20"
+
+  - billing:
+      num_charges: 2
+
+  - discharge: {}

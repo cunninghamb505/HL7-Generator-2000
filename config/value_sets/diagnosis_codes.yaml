@@ -1,0 +1,63 @@
+name: diagnosis_codes
+description: Common ICD-10 diagnosis codes
+
+values:
+  - code: "J18.9"
+    description: "Pneumonia, unspecified organism"
+    category: "Respiratory"
+
+  - code: "I10"
+    description: "Essential (primary) hypertension"
+    category: "Cardiovascular"
+
+  - code: "E11.9"
+    description: "Type 2 diabetes mellitus without complications"
+    category: "Endocrine"
+
+  - code: "J06.9"
+    description: "Acute upper respiratory infection, unspecified"
+    category: "Respiratory"
+
+  - code: "R07.9"
+    description: "Chest pain, unspecified"
+    category: "Symptoms"
+
+  - code: "K80.20"
+    description: "Calculus of gallbladder without obstruction"
+    category: "Digestive"
+
+  - code: "N39.0"
+    description: "Urinary tract infection, site not specified"
+    category: "Genitourinary"
+
+  - code: "M54.5"
+    description: "Low back pain"
+    category: "Musculoskeletal"
+
+  - code: "J44.1"
+    description: "Chronic obstructive pulmonary disease with acute exacerbation"
+    category: "Respiratory"
+
+  - code: "I50.9"
+    description: "Heart failure, unspecified"
+    category: "Cardiovascular"
+
+  - code: "S72.001A"
+    description: "Fracture of unspecified part of neck of right femur"
+    category: "Injury"
+
+  - code: "K35.80"
+    description: "Unspecified acute appendicitis"
+    category: "Digestive"
+
+  - code: "I21.9"
+    description: "Acute myocardial infarction, unspecified"
+    category: "Cardiovascular"
+
+  - code: "A41.9"
+    description: "Sepsis, unspecified organism"
+    category: "Infectious"
+
+  - code: "J96.00"
+    description: "Acute respiratory failure, unspecified"
+    category: "Respiratory"

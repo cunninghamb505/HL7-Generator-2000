@@ -1,0 +1,76 @@
+name: cardiac_workup
+description: Cardiac evaluation with troponin and lipid panel
+weight: 1.0
+patient_class: E
+tags: [emergency, cardiac, labs]
+
+steps:
+  - registration:
+      loc: "ED"
+      patient_class: "E"
+      diagnosis_code: "R07.9"
+      diagnosis_desc: "Chest pain, unspecified"
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - lab_order:
+      order_profile: "TROPONIN"
+      priority: "S"
+
+  - lab_order:
+      order_profile: "CMP"
+      priority: "S"
+
+  - lab_order:
+      order_profile: "CBC"
+      priority: "S"
+
+  - delay:
+      min: "2s"
+      max: "4s"
+
+  - lab_result:
+      order_profile: "TROPONIN"
+
+  - lab_result:
+      order_profile: "CMP"
+
+  - lab_result:
+      order_profile: "CBC"
+
+  - delay:
+      min: "1s"
+      max: "3s"
+
+  - lab_order:
+      order_profile: "LIPID"
+      priority: "R"
+
+  - delay:
+      min: "3s"
+      max: "5s"
+
+  - lab_result:
+      order_profile: "LIPID"
+
+  - condition:
+      probability: 0.3
+      if_true:
+        - admission:
+            loc: "CARD"
+            patient_class: "I"
+        - delay:
+            min: "3s"
+            max: "6s"
+        - document:
+            document_type: "CN"
+            trigger: "T02"
+        - billing:
+            num_charges: 6
+        - discharge: {}
+      if_false:
+        - billing:
+            num_charges: 4
+        - discharge: {}

@@ -1,0 +1,25 @@
+name: appointment_types
+description: Scheduling appointment type codes
+
+values:
+  - code: "ROUTINE"
+    description: "Routine Visit"
+    duration: 30
+  - code: "FOLLOWUP"
+    description: "Follow-up Visit"
+    duration: 20
+  - code: "URGENT"
+    description: "Urgent Visit"
+    duration: 30
+  - code: "NEWPATIENT"
+    description: "New Patient Evaluation"
+    duration: 45
+  - code: "PROCEDURE"
+    description: "Procedure"
+    duration: 60
+  - code: "CONSULTATION"
+    description: "Consultation"
+    duration: 45
+  - code: "PHYSICAL"
+    description: "Annual Physical"
+    duration: 40

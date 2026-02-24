@@ -1,0 +1,81 @@
+name: vaccines
+description: CVX vaccine codes
+
+values:
+  - cvx: "03"
+    name: "MMR"
+    dose: "0.5"
+    units: "mL"
+    route: "SC"
+
+  - cvx: "08"
+    name: "Hep B Adolescent/Adult"
+    dose: "1.0"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "10"
+    name: "IPV"
+    dose: "0.5"
+    units: "mL"
+    route: "SC"
+
+  - cvx: "20"
+    name: "DTaP"
+    dose: "0.5"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "33"
+    name: "Pneumococcal"
+    dose: "0.5"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "88"
+    name: "Influenza"
+    dose: "0.5"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "115"
+    name: "Tdap"
+    dose: "0.5"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "207"
+    name: "COVID-19 mRNA (Moderna)"
+    dose: "0.5"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "208"
+    name: "COVID-19 mRNA (Pfizer)"
+    dose: "0.3"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "21"
+    name: "Varicella"
+    dose: "0.5"
+    units: "mL"
+    route: "SC"
+
+  - cvx: "52"
+    name: "Hep A Adult"
+    dose: "1.0"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "114"
+    name: "Meningococcal MCV4P"
+    dose: "0.5"
+    units: "mL"
+    route: "IM"
+
+  - cvx: "187"
+    name: "Recombinant Zoster"
+    dose: "0.5"
+    units: "mL"
+    route: "IM"

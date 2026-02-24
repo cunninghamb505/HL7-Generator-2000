@@ -1,0 +1,79 @@
+name: annual_physical
+description: Annual physical examination with preventive labs
+weight: 1.5
+patient_class: O
+tags: [outpatient, preventive]
+
+steps:
+  - scheduling:
+      trigger: "S12"
+      appointment_type: "PHYSICAL"
+
+  - delay:
+      min: "2s"
+      max: "4s"
+
+  - registration:
+      loc: "OUT"
+      patient_class: "O"
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - lab_order:
+      order_profile: "CBC"
+      priority: "R"
+
+  - lab_order:
+      order_profile: "CMP"
+      priority: "R"
+
+  - lab_order:
+      order_profile: "LIPID"
+      priority: "R"
+
+  - condition:
+      probability: 0.4
+      if_true:
+        - lab_order:
+            order_profile: "TSH"
+            priority: "R"
+
+  - condition:
+      probability: 0.3
+      if_true:
+        - lab_order:
+            order_profile: "HBA1C"
+            priority: "R"
+
+  - delay:
+      min: "3s"
+      max: "6s"
+
+  - lab_result:
+      order_profile: "CBC"
+
+  - lab_result:
+      order_profile: "CMP"
+
+  - lab_result:
+      order_profile: "LIPID"
+
+  - condition:
+      probability: 0.5
+      if_true:
+        - vaccination: {}
+
+  - document:
+      document_type: "HP"
+      trigger: "T02"
+
+  - billing:
+      num_charges: 2
+
+  - scheduling:
+      trigger: "S12"
+      appointment_type: "FOLLOWUP"
+
+  - discharge: {}

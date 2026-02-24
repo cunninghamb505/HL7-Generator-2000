@@ -1,0 +1,16 @@
+name: races
+description: HL7 race codes (CDC Race & Ethnicity)
+
+values:
+  - code: "2106-3"
+    description: "White"
+  - code: "2054-5"
+    description: "Black or African American"
+  - code: "2028-9"
+    description: "Asian"
+  - code: "1002-5"
+    description: "American Indian or Alaska Native"
+  - code: "2076-8"
+    description: "Native Hawaiian or Other Pacific Islander"
+  - code: "2131-1"
+    description: "Other Race"

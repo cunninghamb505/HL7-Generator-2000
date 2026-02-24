@@ -1,0 +1,36 @@
+name: pharmacy_order
+description: Outpatient pharmacy order and dispense
+weight: 1.5
+patient_class: O
+tags: [outpatient, pharmacy]
+
+steps:
+  - registration:
+      loc: "OUT"
+      patient_class: "O"
+
+  - delay:
+      min: "1s"
+      max: "3s"
+
+  - pharmacy_order: {}
+
+  - delay:
+      min: "2s"
+      max: "4s"
+
+  - pharmacy_dispense: {}
+
+  - condition:
+      probability: 0.3
+      if_true:
+        - pharmacy_order: {}
+        - delay:
+            min: "1s"
+            max: "2s"
+        - pharmacy_dispense: {}
+
+  - billing:
+      num_charges: 2
+
+  - discharge: {}

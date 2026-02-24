@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title_suffix %} - Destinations{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Destinations</h2>
+    <button class="btn btn-success" onclick="showAddDestination()">+ Add Destination</button>
+</div>
+
+<div id="add-dest-form" class="form-card" style="display:none;">
+    <h3>Add Destination</h3>
+    <div class="form-row">
+        <label>Name: <input type="text" id="dest-name"></label>
+        <label>Type:
+            <select id="dest-type">
+                <option value="mllp">MLLP</option>
+                <option value="file">File</option>
+                <option value="console">Console</option>
+            </select>
+        </label>
+    </div>
+    <div class="form-row">
+        <label>Host: <input type="text" id="dest-host" value="127.0.0.1"></label>
+        <label>Port: <input type="number" id="dest-port" value="2575"></label>
+    </div>
+    <div class="form-row">
+        <button class="btn btn-success" onclick="addDestination()">Add</button>
+        <button class="btn btn-secondary" onclick="hideAddDestination()">Cancel</button>
+    </div>
+</div>
+
+<div id="destinations-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Host:Port</th>
+                <th>Enabled</th>
+                <th>Connected</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="destinations-body">
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    loadDestinations();
+    setInterval(loadDestinations, 10000);
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+name: pediatric_visit
+description: Pediatric well-child visit with vaccinations
+weight: 1.0
+patient_class: O
+tags: [outpatient, pediatric, vaccination]
+
+steps:
+  - registration:
+      loc: "PEDS"
+      patient_class: "O"
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - vaccination:
+      vaccine_code: "20"
+      vaccine_name: "DTaP"
+
+  - condition:
+      probability: 0.5
+      if_true:
+        - vaccination:
+            vaccine_code: "10"
+            vaccine_name: "IPV"
+
+  - condition:
+      probability: 0.4
+      if_true:
+        - vaccination:
+            vaccine_code: "08"
+            vaccine_name: "Hep B Adolescent/Adult"
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - document:
+      document_type: "PN"
+      trigger: "T02"
+
+  - scheduling:
+      trigger: "S12"
+      appointment_type: "FOLLOWUP"
+
+  - billing:
+      num_charges: 2
+
+  - discharge: {}

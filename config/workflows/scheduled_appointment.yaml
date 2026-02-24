@@ -1,0 +1,43 @@
+name: scheduled_appointment
+description: Schedule and complete an outpatient appointment
+weight: 1.5
+patient_class: O
+tags: [outpatient, scheduling]
+
+steps:
+  - scheduling:
+      trigger: "S12"
+      appointment_type: "FOLLOWUP"
+      duration: "30"
+
+  - delay:
+      min: "2s"
+      max: "4s"
+
+  - registration:
+      loc: "OUT"
+      patient_class: "O"
+
+  - delay:
+      min: "1s"
+      max: "3s"
+
+  - condition:
+      probability: 0.5
+      if_true:
+        - lab_order:
+            order_profile: "CBC"
+        - delay:
+            min: "2s"
+            max: "4s"
+        - lab_result:
+            order_profile: "CBC"
+
+  - document:
+      document_type: "PN"
+      trigger: "T02"
+
+  - billing:
+      num_charges: 2
+
+  - discharge: {}

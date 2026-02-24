@@ -1,0 +1,28 @@
+name: insurance_plans
+description: Insurance plan identifiers
+
+values:
+  - id: "BC01"
+    name: "Blue Cross Blue Shield"
+    short: "BCBS"
+  - id: "AET1"
+    name: "Aetna Health"
+    short: "AETNA"
+  - id: "UHC1"
+    name: "UnitedHealthcare"
+    short: "UHC"
+  - id: "CIG1"
+    name: "Cigna Healthcare"
+    short: "CIGNA"
+  - id: "HUM1"
+    name: "Humana"
+    short: "HUMANA"
+  - id: "KAI1"
+    name: "Kaiser Permanente"
+    short: "KAISER"
+  - id: "MCD1"
+    name: "Medicaid"
+    short: "MEDICAID"
+  - id: "MCR1"
+    name: "Medicare"
+    short: "MEDICARE"

@@ -1,0 +1,24 @@
+name: languages
+description: ISO 639 language codes used in HL7
+
+values:
+  - code: "ENG"
+    description: "English"
+  - code: "SPA"
+    description: "Spanish"
+  - code: "FRE"
+    description: "French"
+  - code: "CHI"
+    description: "Chinese"
+  - code: "VIE"
+    description: "Vietnamese"
+  - code: "KOR"
+    description: "Korean"
+  - code: "ARA"
+    description: "Arabic"
+  - code: "POR"
+    description: "Portuguese"
+  - code: "RUS"
+    description: "Russian"
+  - code: "GER"
+    description: "German"

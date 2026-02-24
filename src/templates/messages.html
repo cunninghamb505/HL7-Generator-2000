@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title_suffix %} - Messages{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Message Log</h2>
+    <button class="btn btn-danger btn-sm" onclick="clearMessages()">Clear Log</button>
+</div>
+
+<div class="search-bar">
+    <input type="text" id="msg-search" placeholder="Search messages (MRN, name, content)..."
+           oninput="debounceSearch(this.value)">
+    <select id="msg-type-filter" onchange="filterMessages()">
+        <option value="">All Types</option>
+        <option value="ADT">ADT</option>
+        <option value="ORM">ORM</option>
+        <option value="ORU">ORU</option>
+        <option value="RDE">RDE</option>
+        <option value="RDS">RDS</option>
+        <option value="MDM">MDM</option>
+        <option value="DFT">DFT</option>
+        <option value="VXU">VXU</option>
+        <option value="BAR">BAR</option>
+        <option value="SIU">SIU</option>
+        <option value="MFN">MFN</option>
+        <option value="ACK">ACK</option>
+    </select>
+</div>
+
+<div id="messages-table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Type</th>
+                <th>Patient MRN</th>
+                <th>Patient Name</th>
+                <th>Destination</th>
+            </tr>
+        </thead>
+        <tbody id="messages-body">
+        </tbody>
+    </table>
+</div>
+
+<div id="message-detail-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Message Detail</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <pre id="message-detail-content" class="hl7-content"></pre>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    loadMessages();
+    setInterval(loadMessages, 5000);
+</script>
+{% endblock %}

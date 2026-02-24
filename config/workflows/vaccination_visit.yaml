@@ -1,0 +1,33 @@
+name: vaccination_visit
+description: Vaccination clinic visit
+weight: 1.0
+patient_class: O
+tags: [outpatient, vaccination]
+
+steps:
+  - registration:
+      loc: "OUT"
+      patient_class: "O"
+
+  - delay:
+      min: "1s"
+      max: "3s"
+
+  - vaccination: {}
+
+  - condition:
+      probability: 0.2
+      if_true:
+        - delay:
+            min: "1s"
+            max: "2s"
+        - vaccination: {}
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - billing:
+      num_charges: 1
+
+  - discharge: {}

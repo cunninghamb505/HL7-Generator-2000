@@ -1,0 +1,93 @@
+name: surgical_procedure
+description: Surgical admission with pre-op labs and post-op care
+weight: 1.0
+patient_class: I
+tags: [inpatient, surgery, labs]
+
+steps:
+  - admission:
+      loc: "SURG"
+      patient_class: "I"
+      diagnosis_code: "K80.20"
+      diagnosis_desc: "Calculus of gallbladder without obstruction"
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - lab_order:
+      order_profile: "CBC"
+      priority: "R"
+
+  - lab_order:
+      order_profile: "CMP"
+      priority: "R"
+
+  - lab_order:
+      order_profile: "COAG"
+      priority: "R"
+
+  - delay:
+      min: "3s"
+      max: "5s"
+
+  - lab_result:
+      order_profile: "CBC"
+
+  - lab_result:
+      order_profile: "CMP"
+
+  - lab_result:
+      order_profile: "COAG"
+
+  - pharmacy_order:
+      drug_code: "00009-0775"
+      drug_name: "Heparin 5000 Units"
+      dose: "5000"
+      dose_units: "Units"
+      route: "SC"
+
+  - delay:
+      min: "2s"
+      max: "4s"
+
+  - document:
+      document_type: "OP"
+      trigger: "T02"
+
+  - delay:
+      min: "2s"
+      max: "4s"
+
+  - lab_order:
+      order_profile: "CBC"
+      priority: "S"
+
+  - delay:
+      min: "2s"
+      max: "3s"
+
+  - lab_result:
+      order_profile: "CBC"
+
+  - pharmacy_order:
+      drug_code: "00409-1176"
+      drug_name: "Morphine 4mg"
+      dose: "4"
+      dose_units: "mg"
+      route: "IV"
+
+  - pharmacy_dispense: {}
+
+  - delay:
+      min: "3s"
+      max: "5s"
+
+  - document:
+      document_type: "DS"
+      trigger: "T02"
+
+  - billing:
+      num_charges: 8
+
+  - discharge: {}

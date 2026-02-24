@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title_suffix %} - Workflows{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Workflows</h2>
+</div>
+
+<div id="workflows-container" class="cards-grid">
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    loadWorkflows();
+</script>
+{% endblock %}

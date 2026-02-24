@@ -1,0 +1,85 @@
+name: inpatient_admission
+description: Full inpatient admission with labs, meds, and discharge
+weight: 2.0
+patient_class: I
+tags: [inpatient, labs, pharmacy]
+
+steps:
+  - admission:
+      loc: "MED"
+      patient_class: "I"
+      diagnosis_code: "J18.9"
+      diagnosis_desc: "Pneumonia, unspecified organism"
+
+  - delay:
+      min: "1s"
+      max: "3s"
+
+  - document:
+      document_type: "HP"
+      trigger: "T02"
+
+  - lab_order:
+      order_profile: "CBC"
+      priority: "R"
+
+  - lab_order:
+      order_profile: "CMP"
+      priority: "R"
+
+  - delay:
+      min: "3s"
+      max: "6s"
+
+  - lab_result:
+      order_profile: "CBC"
+
+  - lab_result:
+      order_profile: "CMP"
+
+  - pharmacy_order:
+      drug_code: "00074-4963"
+      drug_name: "Vancomycin 1g"
+      dose: "1"
+      dose_units: "g"
+      route: "IV"
+
+  - delay:
+      min: "2s"
+      max: "4s"
+
+  - pharmacy_dispense: {}
+
+  - condition:
+      probability: 0.4
+      if_true:
+        - transfer:
+            loc: "ICU"
+            reason: "Condition deterioration"
+        - delay:
+            min: "3s"
+            max: "6s"
+        - lab_order:
+            order_profile: "TROPONIN"
+            priority: "S"
+        - delay:
+            min: "2s"
+            max: "4s"
+        - lab_result:
+            order_profile: "TROPONIN"
+
+  - delay:
+      min: "2s"
+      max: "5s"
+
+  - document:
+      document_type: "DS"
+      trigger: "T02"
+
+  - billing:
+      num_charges: 5
+
+  - bar:
+      trigger: "P01"
+
+  - discharge: {}

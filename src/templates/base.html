@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HL7 Generator 2000{% block title_suffix %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <script src="/static/js/htmx.min.js"></script>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h1>HL7<span class="accent">Gen</span>2000</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/" class="{% if page == 'dashboard' %}active{% endif %}">&#9881; Dashboard</a></li>
+            <li><a href="/messages" class="{% if page == 'messages' %}active{% endif %}">&#9993; Messages</a></li>
+            <li><a href="/patients" class="{% if page == 'patients' %}active{% endif %}">&#9831; Patients</a></li>
+            <li><a href="/workflows" class="{% if page == 'workflows' %}active{% endif %}">&#9654; Workflows</a></li>
+            <li><a href="/destinations" class="{% if page == 'destinations' %}active{% endif %}">&#9729; Destinations</a></li>
+            <li><a href="/settings" class="{% if page == 'settings' %}active{% endif %}">&#9881; Settings</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <div id="status-indicator" class="status-badge stopped">Stopped</div>
+            <a href="/logout" class="logout-link">Logout</a>
+        </div>
+    </nav>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="/static/js/dashboard.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,67 @@
+name: diabetes_management
+description: Diabetes follow-up with HbA1c and medication review
+weight: 1.0
+patient_class: O
+tags: [outpatient, chronic, labs]
+
+steps:
+  - registration:
+      loc: "OUT"
+      patient_class: "O"
+
+  - delay:
+      min: "1s"
+      max: "2s"
+
+  - lab_order:
+      order_profile: "HBA1C"
+      priority: "R"
+
+  - lab_order:
+      order_profile: "CMP"
+      priority: "R"
+
+  - delay:
+      min: "3s"
+      max: "5s"
+
+  - lab_result:
+      order_profile: "HBA1C"
+
+  - lab_result:
+      order_profile: "CMP"
+
+  - condition:
+      probability: 0.6
+      if_true:
+        - pharmacy_order:
+            drug_code: "00069-1530"
+            drug_name: "Metformin 500mg"
+            dose: "500"
+            dose_units: "mg"
+            route: "PO"
+        - pharmacy_dispense: {}
+
+  - condition:
+      probability: 0.3
+      if_true:
+        - pharmacy_order:
+            drug_code: "00002-7515"
+            drug_name: "Insulin Lispro"
+            dose: "10"
+            dose_units: "Units"
+            route: "SC"
+        - pharmacy_dispense: {}
+
+  - document:
+      document_type: "PN"
+      trigger: "T02"
+
+  - scheduling:
+      trigger: "S12"
+      appointment_type: "FOLLOWUP"
+
+  - billing:
+      num_charges: 2
+
+  - discharge: {}

@@ -1,0 +1,48 @@
+name: lab_tests
+description: Common laboratory test panels and individual tests
+
+values:
+  - code: "80053"
+    name: "Comprehensive Metabolic Panel"
+    abbreviation: "CMP"
+    category: "Chemistry"
+
+  - code: "85025"
+    name: "Complete Blood Count with Differential"
+    abbreviation: "CBC"
+    category: "Hematology"
+
+  - code: "80048"
+    name: "Basic Metabolic Panel"
+    abbreviation: "BMP"
+    category: "Chemistry"
+
+  - code: "80061"
+    name: "Lipid Panel"
+    abbreviation: "LIPID"
+    category: "Chemistry"
+
+  - code: "81001"
+    name: "Urinalysis"
+    abbreviation: "UA"
+    category: "Urinalysis"
+
+  - code: "85610"
+    name: "Prothrombin Time/INR"
+    abbreviation: "COAG"
+    category: "Coagulation"
+
+  - code: "84443"
+    name: "Thyroid Stimulating Hormone"
+    abbreviation: "TSH"
+    category: "Endocrine"
+
+  - code: "93971"
+    name: "Troponin I"
+    abbreviation: "TROPONIN"
+    category: "Cardiac"
+
+  - code: "83036"
+    name: "Hemoglobin A1c"
+    abbreviation: "HBA1C"
+    category: "Endocrine"

@@ -1,0 +1,22 @@
+name: document_types
+description: Clinical document type codes
+
+values:
+  - code: "HP"
+    name: "History and Physical"
+  - code: "DS"
+    name: "Discharge Summary"
+  - code: "CN"
+    name: "Consultation Note"
+  - code: "PN"
+    name: "Progress Note"
+  - code: "OP"
+    name: "Operative Note"
+  - code: "ER"
+    name: "Emergency Note"
+  - code: "SR"
+    name: "Surgical Report"
+  - code: "PR"
+    name: "Pathology Report"
+  - code: "RR"
+    name: "Radiology Report"
