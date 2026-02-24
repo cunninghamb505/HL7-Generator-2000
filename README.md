@@ -21,6 +21,9 @@ Built as a modern replacement for Google's archived [simhospital](https://github
 - **Message Validation**: Per-message-type validation rules with dashboard indicators
 - **Patient Timeline**: Chronological event view per patient with clickable messages
 - **Windows Installer**: One-click installer for running without Python
+<img width="795" height="483" alt="image" src="https://github.com/user-attachments/assets/092f7566-6f91-4c02-b471-76e1c10fd6fc" />
+
+<img width="2542" height="1309" alt="image" src="https://github.com/user-attachments/assets/1ce31a38-9354-46f0-8f8a-3ef1f1e1caac" />
 
 ## Installation
 
