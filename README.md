@@ -22,53 +22,28 @@ Built as a modern replacement for Google's archived [simhospital](https://github
 - **Patient Timeline**: Chronological event view per patient with clickable messages
 - **Windows Installer**: One-click installer for running without Python
 
-## Quick Start
+## Installation
 
-### Prerequisites
+Choose the option that fits your platform:
 
-- Python 3.11 or higher
+| Platform | Method | Python Required? |
+|----------|--------|-----------------|
+| **Windows** | [Download the installer](../../releases/latest) | No |
+| **Linux / macOS** | Docker | No |
+| **Any** | Run from source | Yes (3.11+) |
 
-### Install
+### Option 1: Windows Installer (easiest)
 
-```bash
-git clone <repo-url>
-cd hl7-generator2000
-pip install -r requirements.txt
-```
+Download **HL7Generator2000-Setup.exe** from the [latest release](../../releases/latest) and run it. No Python or other dependencies needed.
 
-### Run
+The installer creates Start Menu and (optionally) Desktop shortcuts. Launching the shortcut auto-starts the simulation and opens the dashboard in your browser at [http://localhost:8080](http://localhost:8080).
 
-```bash
-python -m src
-```
-
-Open [http://localhost:8080](http://localhost:8080) in your browser. Default login credentials are `admin` / `admin`.
-
-To auto-start the simulation on launch:
+### Option 2: Docker (Linux / macOS / Windows)
 
 ```bash
-python -m src --auto-start
-```
+git clone https://github.com/cunninghamb505/HL7-Generator-2000.git
+cd HL7-Generator-2000
 
-### Windows Installer
-
-Download `HL7Generator2000-Setup.exe` from the releases page and run it. No Python required.
-
-The installer creates Start Menu and (optionally) Desktop shortcuts. Launching the shortcut auto-starts the simulation and opens the dashboard in your browser.
-
-To build the installer from source:
-
-```bash
-pip install pyinstaller
-python build_installer.py
-# Produces installer/HL7Generator2000-Setup.exe (~22 MB)
-```
-
-Requires [Inno Setup 6](https://jrsoftware.org/isinfo.php) installed at the default path.
-
-### Docker
-
-```bash
 # Create your .env file with credentials
 cp .env.example .env
 # Edit .env to set your username and password
@@ -77,6 +52,31 @@ docker-compose up --build
 ```
 
 The dashboard will be available at `http://localhost:8080` and MLLP on port `2575`.
+
+### Option 3: Run from Source
+
+Requires Python 3.11 or higher.
+
+```bash
+git clone https://github.com/cunninghamb505/HL7-Generator-2000.git
+cd HL7-Generator-2000
+pip install -r requirements.txt
+python -m src --auto-start
+```
+
+Open [http://localhost:8080](http://localhost:8080) in your browser. Default login credentials are `admin` / `admin`.
+
+### Building the Windows Installer from Source
+
+If you want to build the installer yourself (requires Windows):
+
+```bash
+pip install pyinstaller
+python build_installer.py
+# Produces installer/HL7Generator2000-Setup.exe (~22 MB)
+```
+
+Requires [Inno Setup 6](https://jrsoftware.org/isinfo.php) installed at the default path.
 
 ## Configuration
 
