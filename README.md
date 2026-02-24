@@ -16,6 +16,11 @@ Built as a modern replacement for Google's archived [simhospital](https://github
 - **Time-of-day scheduling**: Configurable message rates that vary by time of day
 - **Configurable insurance**: IN1/IN2/IN3 segments with plan type, certification, employer data; `insurance_rate` controls what % of patients get coverage
 - **Authentication**: Login-protected dashboard with configurable credentials
+- **TLS/SSL for MLLP**: Optional TLS encryption for MLLP connections with cert/key/CA config
+- **Custom Z-Segments**: Define custom Z-segments in YAML, auto-appended to messages
+- **Message Validation**: Per-message-type validation rules with dashboard indicators
+- **Patient Timeline**: Chronological event view per patient with clickable messages
+- **Windows Installer**: One-click installer for running without Python
 
 ## Quick Start
 
@@ -44,6 +49,22 @@ To auto-start the simulation on launch:
 ```bash
 python -m src --auto-start
 ```
+
+### Windows Installer
+
+Download `HL7Generator2000-Setup.exe` from the releases page and run it. No Python required.
+
+The installer creates Start Menu and (optionally) Desktop shortcuts. Launching the shortcut auto-starts the simulation and opens the dashboard in your browser.
+
+To build the installer from source:
+
+```bash
+pip install pyinstaller
+python build_installer.py
+# Produces installer/HL7Generator2000-Setup.exe (~22 MB)
+```
+
+Requires [Inno Setup 6](https://jrsoftware.org/isinfo.php) installed at the default path.
 
 ### Docker
 
@@ -152,6 +173,41 @@ Three destination types are supported:
 
 Destinations can also be managed from the web dashboard under the Destinations page.
 
+### TLS/SSL for MLLP
+
+MLLP destinations support optional TLS encryption:
+
+```yaml
+transport:
+  destinations:
+    - name: secure-mirth
+      type: mllp
+      host: 192.168.1.100
+      port: 2575
+      enabled: true
+      tls_enabled: true
+      tls_cert: "/path/to/client.crt"
+      tls_key: "/path/to/client.key"
+      tls_ca: "/path/to/ca.crt"
+      tls_verify: true
+```
+
+### Custom Z-Segments
+
+Define custom Z-segments in `config/z_segments.yaml`. They are automatically appended to generated messages:
+
+```yaml
+- segment_id: ZPD
+  fields:
+    - name: patient_risk_score
+      type: random_int
+      min: 1
+      max: 10
+    - name: research_consent
+      type: choice
+      values: ["Y", "N"]
+```
+
 ## Customization
 
 ### Adding Workflows
@@ -248,22 +304,28 @@ YAML Config + Workflows
 hl7-generator2000/
 ├── config/
 │   ├── default.yaml           # Main configuration
+│   ├── z_segments.yaml        # Custom Z-segment definitions
 │   ├── workflows/             # Clinical workflow definitions (12 files)
 │   └── value_sets/            # Reference data (labs, meds, diagnoses)
 ├── src/
 │   ├── core/                  # Engine, patient, pool, config, clock
 │   ├── generators/
 │   │   ├── segment_builders/  # One builder per HL7 segment (29 files)
-│   │   └── message_types/     # One generator per message family (12 files)
+│   │   ├── message_types/     # One generator per message family (12 files)
+│   │   └── z_segment_engine.py
+│   ├── validators/            # Message validation rules
 │   ├── workflows/
 │   │   └── step_handlers/     # One handler per step type (14 files)
-│   ├── transport/             # MLLP, file writer, console writer, router
+│   ├── transport/             # MLLP (with TLS), file writer, console, router
 │   ├── data/                  # Faker provider, clinical data, identifiers
 │   ├── web/                   # FastAPI app, auth, WebSocket, routes
 │   ├── templates/             # Jinja2 HTML templates
 │   └── utils/                 # Helpers, message log, logging config
 ├── static/                    # CSS, JavaScript
-├── tests/                     # 72 tests
+├── tests/                     # 107 tests
+├── build_installer.py         # Build script for Windows installer
+├── hl7gen.spec                # PyInstaller spec file
+├── installer.iss              # Inno Setup script
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt

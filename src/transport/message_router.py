@@ -13,7 +13,9 @@ from src.core.patient import Patient
 from src.transport.console_writer import ConsoleWriter
 from src.transport.file_writer import FileWriter
 from src.transport.mllp_client import MLLPClient
+from src.transport.tls_utils import build_ssl_context
 from src.utils.message_log import LogEntry, MessageLog
+from src.validators.message_validator import validate_message
 
 logger = structlog.get_logger(__name__)
 
@@ -28,10 +30,12 @@ class MessageRouter:
     def add_destination(self, config: DestinationConfig) -> None:
         self._configs[config.name] = config
         if config.type == "mllp":
+            ssl_ctx = build_ssl_context(config) if config.tls_enabled else None
             self._destinations[config.name] = MLLPClient(
                 host=config.host,
                 port=config.port,
                 name=config.name,
+                ssl_context=ssl_ctx,
             )
         elif config.type == "file":
             self._destinations[config.name] = FileWriter(
@@ -71,6 +75,16 @@ class MessageRouter:
                 logger.error("route_failed", destination=name, error=str(e))
                 dest_name = f"{name}(error)"
 
+        # Validate message
+        validation = validate_message(message, message_type)
+        validation_errors = validation.errors if not validation.valid else []
+        if validation_errors:
+            logger.warning(
+                "message_validation_failed",
+                message_type=message_type,
+                errors=validation_errors,
+            )
+
         # Log the message
         entry = LogEntry(
             timestamp=time.time(),
@@ -80,6 +94,7 @@ class MessageRouter:
             patient_name=patient_name,
             raw_message=message,
             destination=", ".join(self._destinations.keys()),
+            validation_errors=validation_errors,
         )
         self._message_log.add(entry)
 
@@ -112,6 +127,7 @@ class MessageRouter:
                 "enabled": config.enabled,
                 "connected": connected,
                 "file_path": config.file_path,
+                "tls_enabled": config.tls_enabled,
             })
         return result
 

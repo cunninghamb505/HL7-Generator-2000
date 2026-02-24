@@ -22,6 +22,17 @@ transport:
     - name: console
       type: console
       enabled: true
+    # Example MLLP destination with TLS:
+    # - name: secure_mllp
+    #   type: mllp
+    #   host: 10.0.0.50
+    #   port: 2575
+    #   enabled: true
+    #   tls_enabled: true
+    #   tls_cert: "certs/client.pem"
+    #   tls_key: "certs/client-key.pem"
+    #   tls_ca: "certs/ca.pem"
+    #   tls_verify: true
 
 patient_pool:
   pool_size: 500

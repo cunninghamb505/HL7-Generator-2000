@@ -61,6 +61,7 @@ def main() -> None:
   |  _  | |__ / /
   |_| |_|____|_/
    Generator 2000
+   by Brandon Cunningham
     """)
     print(f"  Web Dashboard: http://{config.web.host}:{config.web.port}")
     print(f"  Auto-start: {config.auto_start}")

@@ -33,6 +33,10 @@ htmlcov/
 output/
 *.hl7
 
+# Installer / build artifacts
+installer/
+*.spec.bak
+
 # OS
 Thumbs.db
 .DS_Store

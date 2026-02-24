@@ -98,6 +98,17 @@ async def destinations_page(request: Request):
     })
 
 
+@router.get("/patients/{mrn}/timeline", response_class=HTMLResponse)
+async def timeline_page(request: Request, mrn: str):
+    redirect = require_auth(request)
+    if redirect:
+        return redirect
+    return templates.TemplateResponse(request, "timeline.html", {
+        "page": "patients",
+        "mrn": mrn,
+    })
+
+
 @router.get("/settings", response_class=HTMLResponse)
 async def settings_page(request: Request):
     redirect = require_auth(request)

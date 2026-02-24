@@ -1,0 +1,26 @@
+segments:
+  - name: ZPD
+    description: "Custom patient data"
+    attach_to: ["ADT", "ORM", "ORU"]
+    fields:
+      - name: department_code
+        position: 1
+        value: "CARDIO"
+      - name: risk_score
+        position: 2
+        type: random_int
+        min: 1
+        max: 10
+      - name: consent_status
+        position: 3
+        type: random_choice
+        choices: ["Y", "N", "P"]
+
+  - name: ZPI
+    description: "Custom insurance extension"
+    attach_to: ["ADT", "BAR"]
+    fields:
+      - name: prior_auth
+        position: 1
+        type: random_choice
+        choices: ["APPROVED", "PENDING", "DENIED"]

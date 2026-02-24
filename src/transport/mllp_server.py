@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import ssl
 from collections.abc import Callable
 from typing import Any
 
@@ -19,18 +20,24 @@ class MLLPServer:
         host: str = "0.0.0.0",
         port: int = 2575,
         on_message: Callable[[str], str | None] | None = None,
+        ssl_context: ssl.SSLContext | None = None,
     ):
         self.host = host
         self.port = port
         self._on_message = on_message
+        self._ssl_context = ssl_context
         self._server: asyncio.Server | None = None
         self._connections: set[asyncio.Task[Any]] = set()
 
+    @property
+    def tls_enabled(self) -> bool:
+        return self._ssl_context is not None
+
     async def start(self) -> None:
         self._server = await asyncio.start_server(
-            self._handle_client, self.host, self.port,
+            self._handle_client, self.host, self.port, ssl=self._ssl_context,
         )
-        logger.info("mllp_server_started", host=self.host, port=self.port)
+        logger.info("mllp_server_started", host=self.host, port=self.port, tls=self.tls_enabled)
 
     async def stop(self) -> None:
         if self._server:

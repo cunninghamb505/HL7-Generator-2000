@@ -19,6 +19,7 @@ class LogEntry:
     destination: str = ""
     ack_status: str = ""
     error: str = ""
+    validation_errors: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -35,6 +36,7 @@ class LogEntry:
             "destination": self.destination,
             "ack_status": self.ack_status,
             "error": self.error,
+            "validation_errors": self.validation_errors,
         }
 
 
@@ -74,6 +76,18 @@ class MessageLog:
             ]
 
         return [e.to_dict() for e in results[offset:offset + limit]]
+
+    def get_by_patient(self, mrn: str, limit: int = 200) -> list[dict[str, Any]]:
+        """Get all messages for a patient, sorted chronologically (oldest first)."""
+        results = [e for e in self._buffer if e.patient_mrn == mrn]
+        results = results[-limit:]
+        return [e.to_dict() for e in results]
+
+    def get_by_index(self, index: int) -> LogEntry | None:
+        """Get a log entry by its buffer index (0 = oldest)."""
+        if 0 <= index < len(self._buffer):
+            return self._buffer[index]
+        return None
 
     @property
     def total_count(self) -> int:

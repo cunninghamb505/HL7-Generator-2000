@@ -35,3 +35,12 @@ async def get_patient(mrn: str):
     if not patient:
         return {"error": "Patient not found"}
     return patient.to_dict()
+
+
+@router.get("/{mrn}/timeline")
+async def get_patient_timeline(mrn: str):
+    """Get chronological timeline of all messages for a patient."""
+    if not deps.message_log:
+        return {"events": []}
+    events = deps.message_log.get_by_patient(mrn)
+    return {"events": events, "mrn": mrn}

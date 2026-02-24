@@ -34,6 +34,11 @@ class DestinationConfig(BaseModel):
     port: int = 2575
     enabled: bool = True
     file_path: str = ""
+    tls_enabled: bool = False
+    tls_cert: str = ""
+    tls_key: str = ""
+    tls_ca: str = ""
+    tls_verify: bool = True
 
 
 class TransportConfig(BaseModel):
@@ -71,6 +76,7 @@ class SimulatorConfig(BaseModel):
     auto_start: bool = False
     workflows_dir: str = "config/workflows"
     value_sets_dir: str = "config/value_sets"
+    z_segments_file: str = "config/z_segments.yaml"
 
 
 def load_config(path: str | Path | None = None) -> SimulatorConfig:

@@ -16,6 +16,7 @@ from src.core.patient_pool import PatientPool
 from src.core.state import SimulationState
 from src.data.value_set_loader import ValueSetLoader
 from src.generators.message_factory import MessageFactory
+from src.generators.z_segment_engine import load_z_segments
 from src.workflows.workflow_registry import WorkflowRegistry
 from src.workflows.step_handlers.base import init_handlers
 from src.transport.message_router import MessageRouter
@@ -51,8 +52,14 @@ def bootstrap(config: SimulatorConfig | None = None) -> dict[str, Any]:
     logger.info("initializing_patient_pool", size=config.patient_pool.pool_size)
     patient_pool.initialize()
 
+    # Load Z-segment definitions
+    z_segment_defs = []
+    if Path(config.z_segments_file).exists():
+        z_segment_defs = load_z_segments(config.z_segments_file)
+        logger.info("z_segments_loaded", count=len(z_segment_defs))
+
     # Message factory
-    message_factory = MessageFactory(config.facility, config.hl7_version)
+    message_factory = MessageFactory(config.facility, config.hl7_version, z_segment_defs)
 
     # Message router + destinations
     message_router = MessageRouter(message_log)

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import ssl
 
 import structlog
 
@@ -18,19 +19,25 @@ class MLLPClient:
         port: int = 2575,
         timeout: float = 10.0,
         name: str = "mllp",
+        ssl_context: ssl.SSLContext | None = None,
     ):
         self.host = host
         self.port = port
         self.timeout = timeout
         self.name = name
+        self._ssl_context = ssl_context
         self._reader: asyncio.StreamReader | None = None
         self._writer: asyncio.StreamWriter | None = None
         self._connected = False
 
+    @property
+    def tls_enabled(self) -> bool:
+        return self._ssl_context is not None
+
     async def connect(self) -> bool:
         try:
             self._reader, self._writer = await asyncio.wait_for(
-                asyncio.open_connection(self.host, self.port),
+                asyncio.open_connection(self.host, self.port, ssl=self._ssl_context),
                 timeout=self.timeout,
             )
             self._connected = True

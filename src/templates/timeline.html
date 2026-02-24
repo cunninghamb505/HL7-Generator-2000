@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title_suffix %} - Patient Timeline{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Patient Timeline: <span style="color:var(--accent)">{{ mrn }}</span></h2>
+    <a href="/patients" class="btn btn-secondary btn-sm">&larr; Back to Patients</a>
+</div>
+
+<div id="timeline-container" class="timeline">
+    <div class="timeline-loading">Loading timeline...</div>
+</div>
+
+<div id="message-detail-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Message Detail</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <pre id="message-detail-content" class="hl7-content"></pre>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    loadTimeline('{{ mrn }}');
+</script>
+{% endblock %}
